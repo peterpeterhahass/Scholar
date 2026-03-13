@@ -1,0 +1,197 @@
+.markdown-viewer {
+  padding: 2rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.markdown-viewer h1 {
+  font-size: 2.5rem;
+  margin: 2rem 0 1rem;
+  color: #1a202c;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.markdown-viewer h2 {
+  font-size: 2rem;
+  margin: 1.75rem 0 1rem;
+  color: #2d3748;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.markdown-viewer h3 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 0.75rem;
+  color: #4a5568;
+}
+
+.markdown-viewer h4 {
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0.5rem;
+  color: #718096;
+}
+
+.markdown-viewer p {
+  margin: 1rem 0;
+  font-size: 1.05rem;
+}
+
+.markdown-viewer ul,
+.markdown-viewer ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.markdown-viewer li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.markdown-viewer ul li {
+  list-style-type: disc;
+}
+
+.markdown-viewer ol li {
+  list-style-type: decimal;
+}
+
+.markdown-viewer .inline-code {
+  background-color: #f7fafc;
+  color: #e53e3e;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.markdown-viewer pre {
+  background-color: #1a202c;
+  color: #f7fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.markdown-viewer pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.markdown-viewer blockquote {
+  border-left: 4px solid #667eea;
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: #4a5568;
+  background-color: #f7fafc;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.markdown-viewer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.markdown-viewer .table-container {
+  overflow-x: auto;
+}
+
+.markdown-viewer th,
+.markdown-viewer td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.markdown-viewer th {
+  background-color: #667eea;
+  color: white;
+  font-weight: 600;
+}
+
+.markdown-viewer tr:nth-child(even) {
+  background-color: #f7fafc;
+}
+
+.markdown-viewer tr:hover {
+  background-color: #edf2f7;
+}
+
+.markdown-viewer strong {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+.markdown-viewer em {
+  color: #4a5568;
+}
+
+.markdown-viewer hr {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 2rem 0;
+}
+
+/* KaTeX 数学公式样式 */
+.markdown-viewer .katex {
+  font-size: 1.1em;
+}
+
+.markdown-viewer .katex-display {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.markdown-viewer .katex-display > .katex {
+  text-align: left;
+}
+
+/* 确保行内公式不会被截断 */
+.markdown-viewer p .katex {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 图片样式 */
+.markdown-viewer .markdown-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .markdown-viewer {
+    padding: 1.5rem;
+  }
+
+  .markdown-viewer h1 {
+    font-size: 2rem;
+  }
+
+  .markdown-viewer h2 {
+    font-size: 1.5rem;
+  }
+
+  .markdown-viewer h3 {
+    font-size: 1.25rem;
+  }
+
+  .markdown-viewer pre {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,674 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.app-header p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin-bottom: 1rem;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* 按钮样式 */
+.btn-primary,
+.btn-secondary,
+.btn-text {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-text {
+  background: transparent;
+  color: #667eea;
+  padding: 0.5rem 1rem;
+}
+
+.btn-text:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* 文件上传区域样式 */
+.file-upload-area {
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: white;
+}
+
+.file-upload-area:hover,
+.file-upload-area.drag-active {
+  border-color: #667eea;
+  background: #f8f9fe;
+}
+
+.upload-label {
+  display: block;
+  cursor: pointer;
+}
+
+.upload-label.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.upload-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.upload-hint {
+  font-size: 0.875rem;
+  color: #a0aec0;
+}
+
+/* 任务列表样式 */
+.tasks-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tasks-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.tasks-list {
+  padding: 1rem;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.task-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.task-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.task-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #333;
+  font-family: monospace;
+}
+
+.task-details {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.task-actions button {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  color: white !important;
+}
+
+.task-actions .btn-secondary {
+  background: #6c757d !important;
+}
+
+.task-actions .btn-secondary:hover:not(:disabled) {
+  background: #5a6268 !important;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
+
+.badge {
+  background: #28a745 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.badge.streaming {
+  background: #667eea !important;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* 进度条样式 */
+.progress-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.progress-text {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 1px solid #fcc;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1.5rem;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.notes-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.notes-header {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.notes-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.notes-header .metadata {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.notes-header .metadata span {
+  background: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  border: 1px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .app-header p {
+    font-size: 1rem;
+  }
+
+  .app-main {
+    padding: 1rem;
+  }
+
+  .notes-header .metadata {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ==================== PPT 相关样式 ==================== */
+
+.mode-selector {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mode-selector h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.mode-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 1rem;
+  border: 2px solid #e9ecef;
+  background: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.mode-btn:hover:not(:disabled) {
+  border-color: #667eea;
+  color: #667eea;
+  background: #f8f9fe;
+}
+
+.mode-btn.active {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.mode-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mode-description {
+  color: #666;
+  font-size: 0.95rem;
+  padding: 1rem;
+  background: #f8f9fe;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  margin: 0;
+}
+
+.upload-container {
+  margin-bottom: 2rem;
+}
+
+.ppt-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.ppt-header {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 1.5rem;
+  color: white;
+}
+
+.ppt-header h2 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.75rem;
+}
+
+.ppt-metadata {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  opacity: 0.95;
+}
+
+.ppt-metadata span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+}
+
+.ppt-preview {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.ppt-icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+}
+
+.ppt-preview h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.ppt-preview p {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.ppt-tips {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: #f8f9fe;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ppt-tips h4 {
+  margin: 0 0 1rem 0;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.ppt-tips ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.ppt-tips li {
+  color: #666;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* ==================== PPT 预览模态框样式 ==================== */
+
+.ppt-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.ppt-preview-content {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.ppt-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ppt-preview-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.btn-close:hover {
+  color: #333;
+}
+
+.ppt-viewer {
+  flex: 1;
+  overflow: auto;
+  padding: 2rem;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ppt-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.ppt-controls button {
+  padding: 0.5rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.ppt-controls button:hover:not(:disabled) {
+  background: #5568d3;
+}
+
+.ppt-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.slide-indicator {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.ppt-loading,
+.ppt-error {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ppt-error {
+  color: #dc3545;
+  text-align: center;
+}
+
+.ppt-error .tip {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+
+.ppt-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.ppt-actions button {
+  min-width: 150px;
+}

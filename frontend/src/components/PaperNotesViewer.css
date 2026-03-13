@@ -1,0 +1,253 @@
+.paper-notes-container {
+  display: flex;
+  gap: 2rem;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+}
+
+/* 左侧：论文笔记 */
+.paper-notes-left {
+  flex: 1;
+  overflow-y: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.paper-notes-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.paper-notes-header h2 {
+  margin: 0;
+  color: #1a202c;
+  font-size: 1.5rem;
+}
+
+.paper-notes-content {
+  line-height: 1.8;
+}
+
+.paper-note-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.paper-note-section:hover {
+  background: #edf2f7;
+  transition: background 0.2s;
+}
+
+.section-title {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.section-content {
+  color: #4a5568;
+}
+
+.section-content h1 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+  color: #1a202c;
+}
+
+.section-content h2 {
+  font-size: 1.25rem;
+  margin: 1rem 0 0.5rem;
+  color: #2d3748;
+}
+
+.section-content h3 {
+  font-size: 1.1rem;
+  margin: 0.75rem 0 0.5rem;
+  color: #4a5568;
+}
+
+.section-content h4 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #718096;
+}
+
+.section-content p {
+  margin: 0.75rem 0;
+}
+
+.section-content ul,
+.section-content ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.section-content li {
+  margin: 0.25rem 0;
+}
+
+.section-content strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.section-content code.inline-code {
+  background-color: #edf2f7;
+  color: #e53e3e;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.section-content pre {
+  background-color: #1a202c;
+  color: #f7fafc;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.section-content blockquote {
+  border-left: 4px solid #667eea;
+  padding-left: 1rem;
+  color: #718096;
+  font-style: italic;
+}
+
+.section-content img.markdown-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* KaTeX 样式 */
+.section-content .katex {
+  font-size: 1.1em;
+}
+
+.section-content .katex-display {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* 右侧：用户笔记 */
+.paper-notes-right {
+  flex: 0 0 350px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.user-notes-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.user-notes-header h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1a202c;
+  font-size: 1.25rem;
+}
+
+.user-notes-hint {
+  margin: 0;
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+.user-notes-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.user-note-section {
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.user-note-section:hover {
+  border-color: #cbd5e0;
+  background: #edf2f7;
+}
+
+.user-note-section.active {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.user-note-title {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.user-note-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.user-note-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.user-note-input::placeholder {
+  color: #a0aec0;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .paper-notes-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .paper-notes-right {
+    flex: 1;
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .paper-notes-left,
+  .paper-notes-right {
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+}
