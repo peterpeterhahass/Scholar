@@ -23,10 +23,13 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = str(Path(__file__).parent / "temp" / "uploads")
 
     # 阿里云 OSS 配置
-    OSS_ACCESS_KEY_ID: str = "REDACTED"
-    OSS_ACCESS_KEY_SECRET: str = "REDACTED"
+    OSS_ACCESS_KEY_ID: str = ""
+    OSS_ACCESS_KEY_SECRET: str = ""
     OSS_ENDPOINT: str = "oss-cn-hangzhou.aliyuncs.com"  # 例如 oss-cn-hangzhou.aliyuncs.com
     OSS_BUCKET_NAME: str = "scholar-image"
+
+    # Gamma API 配置
+    GAMMA_API_KEY: str = ""
 
     class Config:
         env_file = ".env"

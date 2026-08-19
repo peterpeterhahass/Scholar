@@ -3,12 +3,17 @@ GAMMA API PPT 生成器
 使用 GAMMA Generate API 自动创建演示文稿
 """
 
+import os
 import requests
 import time
 import json
 
-# GAMMA API 配置
-API_KEY = "REDACTED"
+# GAMMA API 配置（从环境变量读取，避免硬编码密钥）
+try:
+    from config import settings
+    API_KEY = settings.GAMMA_API_KEY
+except ImportError:
+    API_KEY = os.environ.get("GAMMA_API_KEY", "")
 BASE_URL = "https://public-api.gamma.app/v1.0"
 
 # 代理设置（如果不需要代理，设置为 None）
@@ -487,7 +492,7 @@ if __name__ == "__main__":
 - 1956年：达特茅斯会议，AI概念诞生
 - 早期专家系统出现
 
-http://scholar-image.oss-cn-hangzhou.aliyuncs.com/images%2F3afdfd7f94e049b48a409c7424a7cecf.jpg?OSSAccessKeyId=REDACTED&Expires=1776001069&Signature=REDACTED
+https://example.com/sample-image.jpg
 
 
 ---
@@ -514,7 +519,7 @@ http://scholar-image.oss-cn-hangzhou.aliyuncs.com/images%2F3afdfd7f94e049b48a409
 - 循环神经网络（RNN）：序列数据
 - Transformer：大语言模型基础
 
-http://scholar-image.oss-cn-hangzhou.aliyuncs.com/images%2F3afdfd7f94e049b48a409c7424a7cecf.jpg?OSSAccessKeyId=REDACTED&Expires=1776001069&Signature=REDACTED
+https://example.com/sample-image.jpg
 """
 
     result1 = generate_ppt(
