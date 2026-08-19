@@ -6,11 +6,6 @@ import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import './PaperNotesViewer.css'
 
-interface PaperNotesViewerProps {
-  content: string
-  taskId?: string
-}
-
 interface SectionNotes {
   [key: string]: string
 }
@@ -20,9 +15,16 @@ interface ParsedSection {
   content: string
 }
 
-export default function PaperNotesViewer({ content, taskId }: PaperNotesViewerProps) {
+interface PaperNotesViewerProps {
+  content: string
+  taskId?: string
+  showNotePanel?: boolean
+}
+
+export default function PaperNotesViewer({ content, taskId, showNotePanel = true }: PaperNotesViewerProps) {
   const [userNotes, setUserNotes] = useState<SectionNotes>({})
   const [activeSection, setActiveSection] = useState<string>('')
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   // 转换图片路径
   const convertImagePaths = (markdown: string) => {
@@ -68,9 +70,9 @@ export default function PaperNotesViewer({ content, taskId }: PaperNotesViewerPr
       const section = sections[i]
       const lines = section.split('\n')
       const title = lines[0].trim()
-      const content = lines.slice(1).join('\n').trim()
+      const sectionContent = lines.slice(1).join('\n').trim()
       if (title) {
-        parsed.push({ title, content })
+        parsed.push({ title, content: sectionContent })
       }
     }
 
@@ -89,11 +91,18 @@ export default function PaperNotesViewer({ content, taskId }: PaperNotesViewerPr
   }
 
   return (
-    <div className="paper-notes-container">
-      {/* 左侧：论文笔记 */}
+    <div className={`paper-notes-container${showNotePanel ? '' : ' full-width'}${isFullscreen ? ' fullscreen' : ''}`}>
+      {/* 论文笔记 */}
       <div className="paper-notes-left">
         <div className="paper-notes-header">
           <h2>📄 论文笔记</h2>
+          <button
+            className="fullscreen-btn"
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            title={isFullscreen ? '退出全屏' : '全屏展示'}
+          >
+            {isFullscreen ? '✕' : '⛶'}
+          </button>
         </div>
         <div className="paper-notes-content">
           {sections.map((section, index) => {
@@ -149,36 +158,38 @@ export default function PaperNotesViewer({ content, taskId }: PaperNotesViewerPr
         </div>
       </div>
 
-      {/* 右侧：用户笔记区域 */}
-      <div className="paper-notes-right">
-        <div className="user-notes-header">
-          <h3>✏️ 我的笔记</h3>
-          <p className="user-notes-hint">点击左侧章节，在这里记录您的想法和疑问</p>
-        </div>
-        <div className="user-notes-content">
-          {sections.map((section, index) => {
-            const sectionId = getSectionId(section.title)
-            const isActive = activeSection === sectionId
+      {/* 右侧：用户笔记区域（可选） */}
+      {showNotePanel && (
+        <div className="paper-notes-right">
+          <div className="user-notes-header">
+            <h3>✏️ 我的笔记</h3>
+            <p className="user-notes-hint">点击左侧章节，在这里记录您的想法和疑问</p>
+          </div>
+          <div className="user-notes-content">
+            {sections.map((section, index) => {
+              const sectionId = getSectionId(section.title)
+              const isActive = activeSection === sectionId
 
-            return (
-              <div
-                key={index}
-                className={`user-note-section ${isActive ? 'active' : ''}`}
-                onClick={() => setActiveSection(sectionId)}
-              >
-                <div className="user-note-title">{section.title}</div>
-                <textarea
-                  className="user-note-input"
-                  placeholder="在这里记录您的想法、疑问或补充..."
-                  value={userNotes[sectionId] || ''}
-                  onChange={(e) => saveUserNote(sectionId, e.target.value)}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              </div>
-            )
-          })}
+              return (
+                <div
+                  key={index}
+                  className={`user-note-section ${isActive ? 'active' : ''}`}
+                  onClick={() => setActiveSection(sectionId)}
+                >
+                  <div className="user-note-title">{section.title}</div>
+                  <textarea
+                    className="user-note-input"
+                    placeholder="在这里记录您的想法、疑问或补充..."
+                    value={userNotes[sectionId] || ''}
+                    onChange={(e) => saveUserNote(sectionId, e.target.value)}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </div>
+              )
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

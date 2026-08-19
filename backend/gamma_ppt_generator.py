@@ -51,7 +51,7 @@ def create_ppt(input_text, num_cards=10, language="zh-cn", export_format="pptx",
         "format": "presentation",
         "numCards": num_cards,
         "cardSplit": "inputTextBreaks",
-        "additionalInstructions": "Keep all text content exactly as provided. Do not modify, rephrase or add any text. Use the exact structure and headings from input. Process and display all image URLs from input. Use --- to separate slides.",
+        "additionalInstructions": "Keep all text content exactly as provided. Do not modify, rephrase or add any text. Use the exact structure and headings from input. IMPORTANT: All image URLs in the input MUST be preserved and displayed in the corresponding slides. Do NOT replace or remove any original image URLs. Layout requirements: Images must be properly integrated with the slide layout — position them harmoniously alongside text, maintain visual balance, use appropriate sizing and spacing. Do NOT just dump or force-fit images into slides. Each slide should have a clean, professional composition. For slides without a provided image, you may generate AI images. Use --- to separate slides.",
         "exportAs": export_format,
         "textOptions": {
             "amount": "detailed",
@@ -478,7 +478,6 @@ if __name__ == "__main__":
 - 核心领域：机器学习、深度学习、自然语言处理
 - 发展意义：改变人类生产生活方式
 
-https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800
 ---
 
 
@@ -488,7 +487,8 @@ https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800
 - 1956年：达特茅斯会议，AI概念诞生
 - 早期专家系统出现
 
-https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800
+http://scholar-image.oss-cn-hangzhou.aliyuncs.com/images%2F3afdfd7f94e049b48a409c7424a7cecf.jpg?OSSAccessKeyId=REDACTED&Expires=1776001069&Signature=REDACTED
+
 
 ---
 
@@ -498,8 +498,6 @@ https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800
 - 神经网络研究复苏
 - 深蓝战胜国际象棋冠军
 
-https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800
-
 ---
 
 ## 人工智能发展历程：爆发期（2010年代至今）
@@ -507,8 +505,6 @@ https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800
 - 2012年：AlexNet在ImageNet获胜
 - 2016年：AlphaGo战胜李世石
 - 2022年：ChatGPT引发AI革命
-
-https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800
 
 ---
 
@@ -518,7 +514,7 @@ https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800
 - 循环神经网络（RNN）：序列数据
 - Transformer：大语言模型基础
 
-https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800
+http://scholar-image.oss-cn-hangzhou.aliyuncs.com/images%2F3afdfd7f94e049b48a409c7424a7cecf.jpg?OSSAccessKeyId=REDACTED&Expires=1776001069&Signature=REDACTED
 """
 
     result1 = generate_ppt(
@@ -526,9 +522,8 @@ https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800
         num_cards=13,
         language="zh-cn",
         export_format="pptx",
-        #image_source="placeholder",
-        image_source="noImages",
-        theme_id="aurora"
+        image_source="aiGenerated",
+        theme_id="dawn"
     )
 
     

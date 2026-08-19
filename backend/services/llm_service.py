@@ -2,7 +2,7 @@ import os
 import base64
 from typing import Optional, List, Dict
 from pathlib import Path
-from dashscope import Generation
+from dashscope import MultiModalConversation
 
 
 class LLMService:
@@ -14,6 +14,21 @@ class LLMService:
 
         # 设置 API key
         os.environ["DASHSCOPE_API_KEY"] = api_key
+
+    @staticmethod
+    def _extract_text_from_content(content) -> str:
+        """从响应 content 中提取文本，兼容字符串和列表格式"""
+        if isinstance(content, str):
+            return content
+        if isinstance(content, list):
+            texts = []
+            for item in content:
+                if isinstance(item, dict) and 'text' in item:
+                    texts.append(item['text'])
+                elif isinstance(item, str):
+                    texts.append(item)
+            return ''.join(texts)
+        return str(content)
 
     def _extract_images_from_markdown(self, markdown_content: str, task_id: Optional[str] = None) -> List[Dict]:
         """
@@ -69,21 +84,42 @@ class LLMService:
             return "\n".join([f"- {img}" for img in matches])
         return "（无图片）"
 
+    def _get_mime_type(self, filename: str) -> str:
+        """根据文件扩展名获取 MIME 类型"""
+        name = filename.lower()
+        if name.endswith('.png'):
+            return 'image/png'
+        elif name.endswith('.gif'):
+            return 'image/gif'
+        elif name.endswith('.webp'):
+            return 'image/webp'
+        return 'image/jpeg'
+
     def _build_multimodal_message(self, markdown_content: str, images: List[Dict]) -> List[Dict]:
         """
-        构建多模态消息（包含文本和图片）
+        构建多模态消息：图片按原文位置内联插入，模型能理解图片在论文中的上下文位置
 
         Args:
             markdown_content: Markdown 内容
             images: 图片信息列表
 
         Returns:
-            消息列表
+            消息列表，文本和图片按原文顺序交替排列
         """
-        content = []
+        import re
 
-        # 添加文本内容
-        prompt = f"""你是一个专业的学术论文分析助手。请仔细阅读提供的论文内容（包含文本和图片），生成结构化的学术笔记。
+        # 构建 图片文件名 → base64 的映射
+        image_map = {}
+        for img in images:
+            image_map[img['name']] = img
+
+        # 按 ![](images/xxx) 分割 markdown，保留图片文件名
+        pattern = r'!\[\]\(images/([^)]+)\)'
+        parts = re.split(pattern, markdown_content)
+
+        # parts 交替为：文本、图片文件名、文本、图片文件名、...、文本
+        # 构建 inline 内容：指令 + 原文（图片内联）
+        instruction = """你是一个专业的学术论文分析助手。请按顺序阅读以下论文内容（包含内联图片），生成结构化的学术笔记。
 
 **必须严格按照以下结构生成笔记（使用 Markdown 格式）：**
 
@@ -100,83 +136,60 @@ class LLMService:
 [解释为什么需要解决这个问题，现有方法的不足之处，研究的必要性]
 
 ## 核心方法（How）
-[详细描述论文提出的方法，包括：
-- 方法框架和核心思想
-- 关键算法和技术细节
-- 系统架构和工作流程
-- 与现有方法的区别]
-- **重要：在适当位置插入相关的架构图**，使用格式 `![](images/图片文件名)`
+[详细描述论文提出的方法]
 
 ## 关键技术/创新点
-[列出论文的主要贡献和创新点，使用无序列表：
-- 创新点1
-- 创新点2
-- ...]
+[列出论文的主要贡献和创新点]
 
 ## 实验设置 & 结果
-[总结实验设计和主要结果：
-- 实验数据集
-- 对比方法
-- 评估指标
-- 主要实验结果和性能提升
-- **重要：在描述图表时，插入对应的图片**，使用格式 `![](images/图片文件名)`
+[总结实验设计和主要结果]
 
 ## 优点 / 局限
-[客观评价论文：
-**优点：**
-- 优点1
-- 优点2
-
-**局限：**
-- 局限1
-- 局限2]
+[客观评价论文的优缺点]
 
 ## 我的疑问 / 想法
 [这部分留空，供读者自己填写]
 
 **核心要求：**
-1. **仔细阅读并理解每一张图片**：图片可能包含架构图、表格、公式、图表等重要信息
-2. **必须在生成的笔记中保留所有图片引用**：在适当的位置使用 `![](images/图片文件名)` 格式插入图片
-3. 在笔记中详细描述图片的内容和含义
+1. **仔细阅读并理解每一张图片**：图片已按原文位置内联插入，每张图片下方标注了文件名
+2. **【最重要】必须在笔记中保留所有图片**：使用 `![](images/图片文件名)` 格式，放在与原文对应的位置，绝对不能省略任何图片
+3. 在笔记中详细描述每张图片的内容和含义
 4. 对于架构图，说明组件之间的关系和数据流
 5. 对于表格，总结关键数据和趋势
 6. 对于公式，解释其含义和应用场景
-7. 专业、简洁、学术化的表达风格
-8. 重要概念、定义使用**加粗**标记
-9. 使用无序列表、有序列表组织要点
-10. 保持学术严谨性，避免使用表情符号
-11. 确保每个部分都有实质内容，不要省略任何一个章节
+7. 专业、简洁、学术化的表达风格，重要概念使用**加粗**标记
+8. 使用列表组织要点，保持学术严谨性
 
-原始文档中包含的图片文件名如下（请务必在生成的笔记中使用这些图片）：
+论文中包含的所有图片文件名（生成笔记时必须全部引用）：
 {self._extract_image_filenames(markdown_content)}
 
-文档内容如下：
-{markdown_content}
+以下是论文原文（图片已按原始位置插入，图片下方标注了文件名）：
 
-请生成符合上述结构的专业学术笔记（Markdown 格式，包含对图片的详细分析和图片引用）："""
+---"""
 
-        # 构建多模态消息：先添加文本，再添加所有图片
-        content.append({'text': prompt})
+        content = []
 
-        # 添加图片（使用 base64 data URL 格式）
-        for img in images:
-            # 检测图片类型
-            image_name = img['name'].lower()
-            if image_name.endswith('.jpg') or image_name.endswith('.jpeg'):
-                mime_type = 'image/jpeg'
-            elif image_name.endswith('.png'):
-                mime_type = 'image/png'
-            elif image_name.endswith('.gif'):
-                mime_type = 'image/gif'
-            elif image_name.endswith('.webp'):
-                mime_type = 'image/webp'
-            else:
-                mime_type = 'image/jpeg'  # 默认
+        # 第一段文本：指令 + parts[0]（第一段文本内容）
+        content.append({'text': instruction + '\n' + parts[0]})
 
-            # 使用 base64 data URL 格式
-            content.append({
-                'image': f"data:{mime_type};base64,{img['base64']}"
-            })
+        # 交替处理图片和文本
+        for i in range(1, len(parts), 2):
+            image_name = parts[i]
+            text_after = parts[i + 1] if i + 1 < len(parts) else ''
+
+            # 插入图片（如果能找到对应的 base64 数据）
+            if image_name in image_map:
+                img = image_map[image_name]
+                mime_type = self._get_mime_type(image_name)
+                content.append({
+                    'image': f"data:{mime_type};base64,{img['base64']}"
+                })
+                # 图片后附带文件名标记，帮助模型关联
+                content.append({'text': f'[图片: {image_name}]'})
+
+            # 添加图片后的文本
+            if text_after.strip():
+                content.append({'text': text_after})
 
         return content
 
@@ -273,12 +286,13 @@ class LLMService:
                 print(f"使用多模态模型，包含 {len(images)} 张图片")
 
                 # 调用通义千问多模态 API
-                response = Generation.call(
+                response = MultiModalConversation.call(
+                    api_key=self.api_key,
                     model=self.model_name,
                     messages=messages,
                     temperature=temperature,
-                    max_tokens=4000,
-                    result_format='message'
+                    max_tokens=8000,
+
                 )
             else:
                 # 纯文本调用
@@ -287,12 +301,13 @@ class LLMService:
 
                 print("使用纯文本模式")
 
-                response = Generation.call(
+                response = MultiModalConversation.call(
+                    api_key=self.api_key,
                     model=self.model_name,
                     messages=messages,
                     temperature=temperature,
-                    max_tokens=4000,
-                    result_format='message'
+                    max_tokens=8000,
+
                 )
 
             # 打印响应用于调试
@@ -315,23 +330,16 @@ class LLMService:
             if response.status_code == 200:
                 # 尝试不同的响应格式
                 try:
-                    # 尝试新格式（多模态）
                     if hasattr(response, 'output') and response.output:
                         if hasattr(response.output, 'choices') and response.output.choices:
-                            notes = response.output.choices[0].message.content
+                            notes = self._extract_text_from_content(response.output.choices[0].message.content)
                         else:
-                            # 可能直接是 content
-                            notes = response.output.content if hasattr(response.output, 'content') else str(response.output)
+                            notes = self._extract_text_from_content(response.output.content) if hasattr(response.output, 'content') else str(response.output)
                     else:
-                        # 尝试旧格式
-                        notes = response.output.choices[0].message.content
+                        notes = self._extract_text_from_content(response.output.choices[0].message.content)
 
                 except (AttributeError, IndexError, KeyError) as e:
                     print(f"解析响应失败，尝试备用方法: {e}")
-                    print(f"响应对象: {dir(response)}")
-                    if hasattr(response, 'output'):
-                        print(f"output 对象: {dir(response.output)}")
-                    # 最后的备用方案
                     notes = str(response)
 
                 return {
@@ -392,7 +400,8 @@ class LLMService:
                 print("流式输出：使用纯文本模式")
 
             # 调用通义千问 API（流式）
-            response = Generation.call(
+            response = MultiModalConversation.call(
+                api_key=self.api_key,
                 model=self.model_name,
                 messages=messages,
                 temperature=temperature,
@@ -402,7 +411,7 @@ class LLMService:
 
             for chunk in response:
                 if chunk.status_code == 200:
-                    yield chunk.output.choices[0].message.content
+                    yield self._extract_text_from_content(chunk.output.choices[0].message.content)
                 else:
                     yield f"\n\n错误: {chunk.message}"
                     break
@@ -544,12 +553,13 @@ class LLMService:
                 print(f"生成 PPT 内容：使用多模态模型，包含 {len(images)} 张图片")
 
                 # 调用通义千问多模态 API
-                response = Generation.call(
+                response = MultiModalConversation.call(
+                    api_key=self.api_key,
                     model=self.model_name,
                     messages=messages,
                     temperature=temperature,
-                    max_tokens=4000,
-                    result_format='message'
+                    max_tokens=8000,
+
                 )
             else:
                 # 纯文本调用
@@ -557,25 +567,25 @@ class LLMService:
 
                 print("生成 PPT 内容：使用纯文本模式")
 
-                response = Generation.call(
+                response = MultiModalConversation.call(
+                    api_key=self.api_key,
                     model=self.model_name,
                     messages=messages,
                     temperature=temperature,
-                    max_tokens=4000,
-                    result_format='message'
+                    max_tokens=8000,
+
                 )
 
             # 检查响应状态
             if response.status_code == 200:
                 try:
-                    # 尝试新格式（多模态）
                     if hasattr(response, 'output') and response.output:
                         if hasattr(response.output, 'choices') and response.output.choices:
-                            ppt_content = response.output.choices[0].message.content
+                            ppt_content = self._extract_text_from_content(response.output.choices[0].message.content)
                         else:
-                            ppt_content = response.output.content if hasattr(response.output, 'content') else str(response.output)
+                            ppt_content = self._extract_text_from_content(response.output.content) if hasattr(response.output, 'content') else str(response.output)
                     else:
-                        ppt_content = response.output.choices[0].message.content
+                        ppt_content = self._extract_text_from_content(response.output.choices[0].message.content)
 
                 except (AttributeError, IndexError, KeyError) as e:
                     print(f"解析响应失败: {e}")
@@ -1012,12 +1022,13 @@ $$
                 print(f"生成 Marp 内容：使用多模态模型，包含 {len(images)} 张图片")
 
                 # 调用通义千问多模态 API
-                response = Generation.call(
+                response = MultiModalConversation.call(
+                    api_key=self.api_key,
                     model=self.model_name,
                     messages=messages,
                     temperature=temperature,
-                    max_tokens=4000,
-                    result_format='message'
+                    max_tokens=8000,
+
                 )
             else:
                 # 纯文本调用
@@ -1025,25 +1036,25 @@ $$
 
                 print("生成 Marp 内容：使用纯文本模式")
 
-                response = Generation.call(
+                response = MultiModalConversation.call(
+                    api_key=self.api_key,
                     model=self.model_name,
                     messages=messages,
                     temperature=temperature,
-                    max_tokens=4000,
-                    result_format='message'
+                    max_tokens=8000,
+
                 )
 
             # 检查响应状态
             if response.status_code == 200:
                 try:
-                    # 尝试新格式（多模态）
                     if hasattr(response, 'output') and response.output:
                         if hasattr(response.output, 'choices') and response.output.choices:
-                            marp_content = response.output.choices[0].message.content
+                            marp_content = self._extract_text_from_content(response.output.choices[0].message.content)
                         else:
-                            marp_content = response.output.content if hasattr(response.output, 'content') else str(response.output)
+                            marp_content = self._extract_text_from_content(response.output.content) if hasattr(response.output, 'content') else str(response.output)
                     else:
-                        marp_content = response.output.choices[0].message.content
+                        marp_content = self._extract_text_from_content(response.output.choices[0].message.content)
 
                     # 清理可能的代码块标记
                     if marp_content.strip().startswith('```'):

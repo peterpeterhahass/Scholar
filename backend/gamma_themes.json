@@ -1,13 +1,8 @@
 {
   "data": [
     {
-      "id": "pxlkgrbbdqmpaxf",
-      "name": "!!1111",
-      "type": "custom"
-    },
-    {
-      "id": "y1x3mm3gdd6pirr",
-      "name": "123",
+      "id": "2uj89ywibhdrgr7",
+      "name": "111",
       "type": "custom"
     },
     {
@@ -16,28 +11,13 @@
       "type": "custom"
     },
     {
-      "id": "s7hxs5rm3j7ih7o",
-      "name": "AiALIGN",
-      "type": "custom",
-      "colorKeywords": [
-        "light",
-        "blue",
-        "sky",
-        "white",
-        "glassy",
-        "cool"
-      ],
-      "toneKeywords": [
-        "serious",
-        "corporate",
-        "professional",
-        "subtle",
-        "quiet"
-      ]
-    },
-    {
       "id": "3jkusqthic1vnur",
       "name": "AISULU",
+      "type": "custom"
+    },
+    {
+      "id": "r1hh3ay2rkaldgf",
+      "name": "Akin",
       "type": "custom"
     },
     {
@@ -76,6 +56,11 @@
       ]
     },
     {
+      "id": "1fpdig8i91fcuzj",
+      "name": "Allibet",
+      "type": "custom"
+    },
+    {
       "id": "88x8vmm5k4crhqi",
       "name": "alp",
       "type": "custom"
@@ -83,6 +68,11 @@
     {
       "id": "m7hsdm3dcuhtbif",
       "name": "aptx",
+      "type": "custom"
+    },
+    {
+      "id": "nb6z23aq8dfn4cn",
+      "name": "arabic",
       "type": "custom"
     },
     {
@@ -438,6 +428,18 @@
       ]
     },
     {
+      "id": "x8m6rakjixjt682",
+      "name": "bom",
+      "type": "custom",
+      "colorKeywords": [
+        "dark",
+        "burgundy",
+        "red",
+        "purple"
+      ],
+      "toneKeywords": []
+    },
+    {
       "id": "qx4mqehvwjbh51f",
       "name": "bom",
       "type": "custom",
@@ -459,18 +461,6 @@
         "nostalgic",
         "earthy"
       ]
-    },
-    {
-      "id": "x8m6rakjixjt682",
-      "name": "bom",
-      "type": "custom",
-      "colorKeywords": [
-        "dark",
-        "burgundy",
-        "red",
-        "purple"
-      ],
-      "toneKeywords": []
     },
     {
       "id": "bonan-hale",
@@ -793,6 +783,16 @@
         "aesthetic",
         "organic"
       ]
+    },
+    {
+      "id": "836ixrdicvf2283",
+      "name": "CIIF Global",
+      "type": "custom"
+    },
+    {
+      "id": "ff6qezwbshaxlsb",
+      "name": "Cl-Another11",
+      "type": "custom"
     },
     {
       "id": "clementa",
@@ -1120,85 +1120,8 @@
         "white",
         "professional"
       ]
-    },
-    {
-      "id": "6p8w6dz8hg8yf8s",
-      "name": "dk414",
-      "type": "custom"
-    },
-    {
-      "id": "dune",
-      "name": "Dune",
-      "type": "standard",
-      "colorKeywords": [
-        "light",
-        "beige",
-        "white",
-        "cream",
-        "gold",
-        "earthy",
-        "warm",
-        "sandy"
-      ],
-      "toneKeywords": [
-        "feminine",
-        "serious",
-        "classy",
-        "elegant",
-        "professional",
-        "simple",
-        "minimalist",
-        "clean",
-        "luxury",
-        "deluxe",
-        "classic",
-        "vintage",
-        "mature"
-      ]
-    },
-    {
-      "id": "editoria",
-      "name": "Editoria",
-      "type": "standard",
-      "colorKeywords": [
-        "graphite black",
-        "deep charcoal",
-        "muted black",
-        "soot gray",
-        "stone black",
-        "warm gray",
-        "pebble gray",
-        "driftwood gray",
-        "soft taupe",
-        "sand mist",
-        "beige gray",
-        "off-white",
-        "pale cream",
-        "cloud white",
-        "eggshell",
-        "parchment beige"
-      ],
-      "toneKeywords": [
-        "neutral",
-        "classy",
-        "elegant",
-        "professional",
-        "simple",
-        "minimalist",
-        "clean",
-        "subtle",
-        "quiet",
-        "soft",
-        "modern",
-        "traditional",
-        "fresh",
-        "mature",
-        "inspirational",
-        "creative",
-        "organic"
-      ]
     }
   ],
   "hasMore": true,
-  "nextCursor": "eyJkIjp7ImlkIjoiZWRpdG9yaWEifSwicyI6IjI2OTdhYjIzMjM2ODI3YjA4NDFjMDg4YmJjOThhMWQ3N2Q2OTQ4NjA4M2NhYWU0ZjkyZDFjNmQ2Y2U3NmYyNmIifQ=="
+  "nextCursor": "eyJkIjp7ImlkIjoiZGlhbG9ndWUifSwicyI6ImRjYzVmZjVkMzk3ODJhMWRlZjY2MTMwNzAzMzg2MmZkMTY5ZDQ2YmQwMjRkZDZjODM1OTYyZTZiZWFmMmU1ZjAifQ=="
 }

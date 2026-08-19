@@ -138,6 +138,37 @@ function App() {
     }
   }
 
+  // 预览已生成的笔记（不调用LLM，直接读取缓存）
+  const handlePreviewNotes = async (taskId: string) => {
+    setLoading(true)
+    setError(null)
+    setPPTData(null)
+    setShowTasks(false)
+
+    try {
+      const response = await fetch(`/api/notes/${taskId}`)
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.detail || '获取笔记失败')
+      }
+
+      const data = await response.json()
+      setNotesData({
+        notes: data.content,
+        metadata: {
+          source: 'existing_task',
+          model: 'cached',
+          tokens_used: 0,
+          task_id: taskId,
+        }
+      })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '获取笔记失败')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   // 生成 Marp PPT
   const handleGenerateMarpPPT = async (taskId: string) => {
     setLoading(true)
@@ -435,6 +466,13 @@ function App() {
                     </div>
                     <div className="task-actions">
                       <button
+                        className="btn-secondary"
+                        onClick={() => handlePreviewNotes(task.task_id)}
+                        disabled={loading}
+                      >
+                        {loading ? '加载中...' : '👁️ 预览笔记'}
+                      </button>
+                      <button
                         className="btn-primary"
                         onClick={() => handleGenerateFromTask(task.task_id, 'notes')}
                         disabled={loading}
@@ -508,6 +546,7 @@ function App() {
                 <PaperNotesViewer
                   content={notesData.notes}
                   taskId={notesData.metadata.task_id}
+                  showNotePanel={false}
                 />
               </div>
             )}

@@ -2,33 +2,31 @@
 GAMMA 主题列表
 ================================================================================
 
-1. !!1111
-   ID: pxlkgrbbdqmpaxf
+1. 111
+   ID: 2uj89ywibhdrgr7
    类型: custom
 
-2. 123
-   ID: y1x3mm3gdd6pirr
-   类型: custom
-
-3. 6
+2. 6
    ID: jhwoqqc4qavr7p1
    类型: custom
 
-4. AiALIGN
-   ID: s7hxs5rm3j7ih7o
-   类型: custom
-   配色: light, blue, sky, white, glassy
-   风格: serious, corporate, professional, subtle, quiet
-
-5. AISULU
+3. AISULU
    ID: 3jkusqthic1vnur
    类型: custom
 
-6. Alien
+4. Akin
+   ID: r1hh3ay2rkaldgf
+   类型: custom
+
+5. Alien
    ID: alien
    类型: standard
    配色: Green, lime green, neon green, vibrant green, light green
    风格: playful, friendly, fun, complex, bold
+
+6. Allibet
+   ID: 1fpdig8i91fcuzj
+   类型: custom
 
 7. alp
    ID: 88x8vmm5k4crhqi
@@ -38,250 +36,246 @@ GAMMA 主题列表
    ID: m7hsdm3dcuhtbif
    类型: custom
 
-9. Ash
+9. arabic
+   ID: nb6z23aq8dfn4cn
+   类型: custom
+
+10. Ash
    ID: ash
    类型: standard
    配色: black, white, light gray, b&w, high contrast
    风格: Geometric, serious, formal, professional, clean
 
-10. Ashrose
+11. Ashrose
    ID: ashrose
    类型: standard
    配色: Pearlescent White, Holographic Silver, Soft Lavender, Lilac Shimmer, white
    风格: Iridescent, Metallic, Pearlescent, Pastel, Shimmer
 
-11. Atacama
+12. Atacama
    ID: atacama
    类型: standard
    配色: dark, black, neon, white, contrast
    风格: playful, complex, loud, bold, expensive
 
-12. Atmosphere
+13. Atmosphere
    ID: atmosphere
    类型: standard
    配色: light, orange, salmon, pink, purple
    风格: feminine, playful, friendly, bold, loud
 
-13. Aurora
+14. Aurora
    ID: aurora
    类型: standard
    配色: dark, gradient, fuchsia, pink, purple
    风格: professional, playful, friendly, bold, modern
 
-14. Aurum
+15. Aurum
    ID: aurum
    类型: standard
    配色: gold, metallic, black, metal, golden
    风格: classy, formal, elegant, professional, complex
 
-15. Basic Dark
+16. Basic Dark
    ID: default-dark
    类型: standard
    配色: dark, black, blue, purple, b&w
    风格: serious, formal, professional, minimalist, bold
 
-16. Basic Light
+17. Basic Light
    ID: default-light
    类型: standard
    配色: light, blue, white, black, b&w
    风格: serious, corporate, formal, casual, professional
 
-17. Bee Happy
+18. Bee Happy
    ID: bee-happy
    类型: standard
    配色: yellow, bright, dark
    风格: soft, rounded, contrast, friendly
 
-18. Blueberry 
+19. Blueberry 
    ID: blueberry
    类型: standard
    配色: blueberry, purple, indigo, pink, dark
    风格: Playful, friendly, fun, bold, loud
 
-19. Blues
+20. Blues
    ID: blues
    类型: standard
    配色: dark blue, royal blue, indigo, navy blue, white
    风格: classy, complex, bold, loud, professional
 
-20. Blue Steel
+21. Blue Steel
    ID: blue-steel
    类型: standard
    配色: dark, black, gray, blue, navy
    风格: corporate, friendly, clean, soft, modern
-
-21. bom
-   ID: qx4mqehvwjbh51f
-   类型: custom
-   配色: pumpkin orange, chocolate brown, golden tan, burnt umber, cream
-   风格: Warm, retro, grounded, bold, optimistic
 
 22. bom
    ID: x8m6rakjixjt682
    类型: custom
    配色: dark, burgundy, red, purple
 
-23. Bonan Hale
+23. bom
+   ID: qx4mqehvwjbh51f
+   类型: custom
+   配色: pumpkin orange, chocolate brown, golden tan, burnt umber, cream
+   风格: Warm, retro, grounded, bold, optimistic
+
+24. Bonan Hale
    ID: bonan-hale
    类型: standard
    配色: black, gray, yellow
    风格: dark, modern, minimalist, professional
 
-24. Borealis
+25. Borealis
    ID: borealis
    类型: standard
    配色: dark, navy, royal blue, turquoise, vibrant
    风格: playful, friendly, casual, fun, bold
 
-25. Breeze
+26. Breeze
    ID: breeze
    类型: standard
    配色: blue, soft blue, light blue, sky blue, powder blue
    风格: simple, soft, subtle, modern, fresh
 
-26. Bubble Gum
+27. Bubble Gum
    ID: bubble-gum
    类型: standard
    配色: black, dark, pink, warm pink, calm pink
    风格: Playful, friendly, casual, fun, simple
 
-27. By: Dr. Ali Nasser Al-Tahitah
+28. By: Dr. Ali Nasser Al-Tahitah
    ID: 9ycgvphbgqfe7sj
    类型: custom
    配色: prism, blue, lilac, lavender, indigo
    风格: Futuristic, dynamic, modern, inspiring, sleek
 
-28. Canaveral
+29. Canaveral
    ID: canaveral
    类型: standard
    配色: dark, orange, salmon, black, neon
    风格: playful, bold, loud, modern, futuristic
 
-29. Chimney Dust
+30. Chimney Dust
    ID: chimney-dust
    类型: standard
    配色: dark, gray, dark gray, charcoal gray, black
    风格: serious, corporate, formal, simple, clean
 
-30. Chimney Smoke
+31. Chimney Smoke
    ID: chimney-smoke
    类型: standard
    配色: White, light, light gray, silver, chrome
    风格: serious, corporate, formal, elegant, professional
 
-31. Chisel
+32. Chisel
    ID: chisel
    类型: standard
    配色: white, tan, brown, beige, neutral
    风格: professional, simple, modern, serif, earthy
 
-32. CHOCHIFONG
+33. CHOCHIFONG
    ID: 8ki5lgo6ghrj858
    类型: custom
 
-33. Chocolate
+34. Chocolate
    ID: chocolate
    类型: standard
    配色: Brown, blush beige, dusty rose, espresso color, dark
    风格: feminine, serious, classy, professional, simple
 
-34. Cigar
+35. Cigar
    ID: cigar
    类型: standard
    配色: sienna, chestnut color, cinnamon brown, copper color, terracotta color
    风格: feminine, serious, classy, corporate, formal
 
-35. Clementa
+36. CIIF Global
+   ID: 836ixrdicvf2283
+   类型: custom
+
+37. Cl-Another11
+   ID: ff6qezwbshaxlsb
+   类型: custom
+
+38. Clementa
    ID: clementa
    类型: standard
    配色: pumpkin orange, chocolate brown, golden tan, burnt umber, cream
    风格: Warm, retro, grounded, bold, optimistic
 
-36. Coal
+39. Coal
    ID: coal
    类型: standard
    配色: gray, white, dark gray, b&w, high contrast
    风格: Serious, corporate, formal, professional, simple
 
-37. Commons
+40. Commons
    ID: commons
    类型: standard
    配色: light, gray, white, green
    风格: professional, clean, modern, simple, tech
 
-38. Consultant
+41. Consultant
    ID: consultant
    类型: standard
    配色: light, blue, white, cool
    风格: consulting, corporate, formal, business, professional
 
-39. Coral Glow
+42. Coral Glow
    ID: coral-glow
    类型: standard
    配色: coral pink, peach, blush, rose, pastel
    风格: Fresh, modern, uplifting, calming, creative
 
-40. Cornfield
+43. Cornfield
    ID: cornfield
    类型: standard
    配色: olive green, moss green, army green, muted green, khaki green
    风格: fun, classy, playful, vintage, loud
 
-41. Cornflower
+44. Cornflower
    ID: cornflower
    类型: standard
    配色: blue, calm blue, sky blue, baby blue, white
    风格: playful, fun, friendly, casual, simple
 
-42. Creme
+45. Creme
    ID: creme
    类型: standard
    配色: cream, creme, beige, earthy, neutral
    风格: feminine, serious, classy, corporate, formal
 
-43. Daktilo
+46. Daktilo
    ID: daktilo
    类型: standard
    配色: light, cream, beige, peach, white
    风格: typewriter, edgy
 
-44. Dawn
+47. Dawn
    ID: dawn
    类型: standard
    配色: Dark, slate, gray, black, peach
    风格: Simple, modern, minimalist, clean
 
-45. Daydream
+48. Daydream
    ID: daydream
    类型: standard
    配色: light, white, light-gray, gradient, glassy
    风格: playful, friendly, soft, bold, modern
 
-46. deep 
+49. deep 
    ID: qorkr1og3te466a
    类型: custom
 
-47. Dialogue
+50. Dialogue
    ID: dialogue
    类型: standard
    配色: light, orange, white, warm
    风格: bright, light, airy, modern, serif
-
-48. dk414
-   ID: 6p8w6dz8hg8yf8s
-   类型: custom
-
-49. Dune
-   ID: dune
-   类型: standard
-   配色: light, beige, white, cream, gold
-   风格: feminine, serious, classy, elegant, professional
-
-50. Editoria
-   ID: editoria
-   类型: standard
-   配色: graphite black, deep charcoal, muted black, soot gray, stone black
-   风格: neutral, classy, elegant, professional, simple
 
 ================================================================================
 使用方法：

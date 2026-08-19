@@ -13,6 +13,7 @@ from services.mineru_service import MinerUService
 from services.llm_service import LLMService
 from services.ppt_service import PPTService
 from services.marp_service import MarpService
+from services.markdown_extractor.note_viewer import router as notes_router
 
 # 初始化 FastAPI 应用
 app = FastAPI(
@@ -46,6 +47,10 @@ os.makedirs("./temp/ppt_output", exist_ok=True)
 os.makedirs("./temp/saved_ppt_contents", exist_ok=True)
 os.makedirs("./temp/marp_output", exist_ok=True)
 os.makedirs("./temp/marp_markdowns", exist_ok=True)
+os.makedirs("./temp/extractor_output", exist_ok=True)
+
+# 注册学术笔记路由
+app.include_router(notes_router)
 
 
 @app.get("/")
